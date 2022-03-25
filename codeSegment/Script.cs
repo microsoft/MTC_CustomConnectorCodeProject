@@ -47,12 +47,11 @@ public class Script : ScriptBase
             var rawResultAsJson = JObject.Parse(responseString);
 
             //create the empty shells
-            var responseItems = @"{'items':[]}";
-            var responseItem = @"{'href':'','title':'','timeslot':'','speaker':''}";
+            var responseItems = @"{'collection':{'items':[]}}";
 
             //create the JObject Handles
             JObject itemsTemplateParsed = JObject.Parse(responseItems);
-            JArray itemsTemplateArray = (JArray)itemsTemplateParsed["items"];
+            JArray itemsTemplateArray = (JArray)itemsTemplateParsed["collection"]["items"];
 
             try
             {
@@ -69,9 +68,6 @@ public class Script : ScriptBase
                         string currTitle = string.Empty;
                         string currDate = string.Empty;
                         string currSpeaker = string.Empty;
-
-                        //load the item JObject with the empty shell
-                        JObject itemTemplateParsed = JObject.Parse(responseItem);
 
                         //get the collection of items in the data array
                         var dataArray = (JArray)item["data"];
