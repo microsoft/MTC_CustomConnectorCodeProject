@@ -6,11 +6,12 @@ try
     //create the HttpRequest that matches the request on the custom connector
     HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, "[REPLACE WITH CUSTOM CONNECTOR URL]");
     requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
     //ADD ANY ADDITIONAL HEADERS HERE
 
     //API-Management Subscription Key
     // requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", "[REPLACE WITH YOUR SUBSCRIPTION KEY]");
-]
+
     //create a new script object
     var myScript = new Script();
 
