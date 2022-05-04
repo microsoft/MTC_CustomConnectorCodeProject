@@ -1,29 +1,27 @@
 using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Net.Http;
 
 public class Script : ScriptBase
 {
-    public override StringContent CreateJsonContent(string serializedJson)
-    {
-        return new StringContent(serializedJson);
-    }
 
     public Script()
     {
         
     }
+    public override StringContent CreateJsonContent(string serializedJson)
+    {
+        return new StringContent(serializedJson);
+    }
 
-    public override async Task<string> ExecuteAsync()
+    public override async Task<HttpResponseMessage> ExecuteAsync()
     {
         try
         {
-            //TODO: uncomment
-            // if(this.Context.OperationId == "GetSessions")
-            // {
-                return await this.HandleGetSessions().ConfigureAwait(false);
-            // }
-
-            
+            if(this.Context.OperationId == "GetSessions")
+            {
+                return await this.HandleGetSessions();
+            }            
         }
         catch (Exception ex)
         {            
@@ -31,17 +29,17 @@ public class Script : ScriptBase
         }
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.BadRequest);
             response.Content = CreateJsonContent($"Unknown operation ID '{this.Context.OperationId}'");
-            return "Hello"; //;
+            return response;
     }
 
-    private async Task<string> HandleGetSessions()
+    private async Task<HttpResponseMessage> HandleGetSessions()
     {
-        //HttpResponseMessage response = await this.Context.SendAsync(this.Context.Request, this.CancellationToken);
+        HttpResponseMessage response = await this.Context.SendAsync(this.Context.Request, this.CancellationToken);
 
-        // if(response.IsSuccessStatusCode)
-        // {
+        if(response.IsSuccessStatusCode)
+        {
             //get the response as a string
-            var responseString = myJsonResponse.response; // await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
+            var responseString = await response.Content.ReadAsStringAsync();
 
             //convert the string to a json object
             var rawResultAsJson = JObject.Parse(responseString);
@@ -103,10 +101,10 @@ public class Script : ScriptBase
             {
                 Console.WriteLine(ex.Message);
             }
-            
-        // }
-        
-        Console.WriteLine(itemsTemplateParsed.ToString());
-        return "Hello"; // response;
+
+            response.Content = CreateJsonContent(itemsTemplateParsed.ToString());
+
+        }
+        return response;
     }
 }

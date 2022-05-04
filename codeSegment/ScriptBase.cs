@@ -1,7 +1,8 @@
+using System.Net.Http;
 public abstract class ScriptBase
 {
     // Context object
-    public IScriptContext Context { get; }
+    public IScriptContext Context { get; set;} //added the setter, but only setting it outside of the Script impelementation.
 
     // CancellationToken for the execution
     public CancellationToken CancellationToken { get; }
@@ -10,7 +11,7 @@ public abstract class ScriptBase
     public abstract StringContent CreateJsonContent(string serializedJson);
 
     // Abstract method for your code
-    public abstract Task<string> ExecuteAsync();
+    public abstract Task<HttpResponseMessage> ExecuteAsync();
 }
 
 public interface IScriptContext
@@ -19,10 +20,10 @@ public interface IScriptContext
     string CorrelationId { get; }
 
     // Connector Operation Id
-    string OperationId { get; }
+    string OperationId { get; set; } //added the setter, but only setting it outside of the Script impelementation.
 
     // Incoming request
-    HttpRequestMessage Request { get; }
+    HttpRequestMessage Request { get; set;} //added the setter, but only setting it outside of the Script impelementation.
 
     // Logger instance
     ILogger Logger { get; }
