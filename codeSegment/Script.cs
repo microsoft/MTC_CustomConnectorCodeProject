@@ -105,6 +105,8 @@ public class Script : ScriptBase
             response.Content = CreateJsonContent(itemsTemplateParsed.ToString());
 
         }
+
         return response;
     }
 }
+
