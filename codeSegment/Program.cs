@@ -1,16 +1,21 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Net.Http.Headers;
 
+//TODO: provide these settings.
+string CustomConnectorUrl = "[REPLACE WITH CUSTOM CONNECTOR URL]"; //This is the url your custom connector uses.
+string OcpApimSubscriptionKey = "[REPLACE WITH YOUR SUBSCRIPTION KEY]";  // if you use this, uncomment line 17 to include this value in the header.
+
 try
 {
     //create the HttpRequest that matches the request on the custom connector
-    HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, "[REPLACE WITH CUSTOM CONNECTOR URL]");
+    HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, CustomConnectorUrl);
     requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
     //ADD ANY ADDITIONAL HEADERS HERE
+    //requestMessage.Headers.Add("[YOUR HEADER KEY]", "[YOUR HEADER VALUE]");
 
     //API-Management Subscription Key
-    // requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", "[REPLACE WITH YOUR SUBSCRIPTION KEY]");
+    //requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", OcpApimSubscriptionKey);
 
     //create a new script object
     var myScript = new Script();
