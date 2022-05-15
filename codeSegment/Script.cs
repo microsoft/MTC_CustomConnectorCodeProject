@@ -10,9 +10,11 @@ public class Script : ScriptBase
         
     }
 
-    // this code needs to be uncommented when testing locally.
+    // TODO: this code needs to be uncommented when testing locally.
     // do not put any additional code in this method as you cannot override
-    // it in the script.cs you upload.  So just comment it back up.
+    // it in the script.cs you upload.  So just comment it back up or delete it when ready to deploy.
+    // Enhancement: Would be great if there was an Action that could pull this block of code out on check in. 
+    //
     // public override StringContent CreateJsonContent(string serializedJson)
     // {
     //     return new StringContent(serializedJson);
