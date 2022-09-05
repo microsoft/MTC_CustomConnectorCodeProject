@@ -1,9 +1,16 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 using System.Net.Http.Headers;
 
-//TODO: provide these settings.
-string CustomConnectorUrl = "[REPLACE WITH CUSTOM CONNECTOR URL]"; //This is the url your custom connector uses.
-string OcpApimSubscriptionKey = "[REPLACE WITH YOUR SUBSCRIPTION KEY]";  // if you use this, uncomment line 17 to include this value in the header.
+//variables:
+//CustomConnectorUrl(Required) - url of the api used in the custom connector.
+string CustomConnectorUrl = "https://conferenceapi.azurewebsites.net/sessions";// "[REPLACE WITH YOUR CUSTOM CONNECTOR URL]";
+
+//OperationId(Required) - the operation id for the custom connector.
+string OperationId = "GetSessions";//"[REPLACE WITH YOUR OPERATION ID]";
+
+//Ocp-Apim-Subscription-Key(Optional) - the subscription key for the custom connector if using a service like API-M.
+string OcpApimSubscriptionKey = "[REPLACE WITH YOUR OCP APIM SUBSCRIPTION KEY]";
+
 
 try
 {
@@ -12,17 +19,17 @@ try
     requestMessage.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
     //ADD ANY ADDITIONAL HEADERS HERE
-    //requestMessage.Headers.Add("[YOUR HEADER KEY]", "[YOUR HEADER VALUE]");
 
-    //API-Management Subscription Key
-    //requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", OcpApimSubscriptionKey);
+    //API-Management Subscription Key - uncomment if using API-M
+    // requestMessage.Headers.Add("Ocp-Apim-Subscription-Key", OcpApimSubscriptionKey);
 
     //create a new script object
     var myScript = new Script();
 
     //create a scriptcontext object and assign it to the Context property of the script class
-    var myScriptContext = new ScriptContext("GetSessions", requestMessage);
-    myScript.Context = myScriptContext;    
+
+    var myScriptContext = new ScriptContext(OperationId, requestMessage);
+    myScript.Context = myScriptContext;
 
     //use the script object to execute the api call
     HttpResponseMessage response = myScript.ExecuteAsync().ConfigureAwait(true).GetAwaiter().GetResult();
