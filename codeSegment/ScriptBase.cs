@@ -1,14 +1,21 @@
 using System.Net.Http;
+using System.Text;
+
 public abstract class ScriptBase
 {
     // Context object
-    public IScriptContext Context { get; set;} //added the setter, but only setting it outside of the Script impelementation.
+    //added the setter, but only setting it outside of the Script impelementation.
+    public IScriptContext Context { get; set; } 
 
     // CancellationToken for the execution
     public CancellationToken CancellationToken { get; }
 
     // Helper: Creates a StringContent object from the serialized JSON
-    public abstract StringContent CreateJsonContent(string serializedJson);
+    public static StringContent CreateJsonContent(string serializedJson)
+    {
+        //creating a dummy body so this will work in an abstract class
+        return new StringContent(serializedJson, Encoding.UTF8, "application/json");
+    }
 
     // Abstract method for your code
     public abstract Task<HttpResponseMessage> ExecuteAsync();
