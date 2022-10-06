@@ -1,33 +1,26 @@
-# Project
+# Custom Connector Code Project
+This is dotnet Core v6 console project for locally creating the 'Code' section of a custom connector.  This project provides everything you need to develop the script on your machine using all of the appropriately named classes and interfaces that exist in the custom connector.  Write your code in this project and then upload the Script.cs file into the Code section of you custom connector once your local testing is complete.
 
-> This repo has been populated by an initial template to help get you started. Please
-> make sure to update the content to build a great experience for community-building.
+## Getting Started
+The 'main' branch of this repository contains the basic structure required for you to add your code.  The following variables are available in the Program.cs file:
+* CustomConnectorUrl (Required) - The URL of the API used by the custom connector. 
+* OperationID (Required) - The operation ID as defined in the custom connector.  This code only handles 1 operation ID, but there could be multiple operations and this allows the code flow to process the appropriate response.
+* OcpApimSubscriptionKey (Optional) - The API key used by the custom connector to authenticate against API-M.  This is only required if the API is behind a Subscription Key secured API-M instance.
 
-As the maintainer of this project, please make a few updates:
+With these values added to the Program.cs file, you can run the project and it will return the Http response from the API.  At this point, you can make the changes to the response using the Script.cs file.
 
-- Improving this README.MD file to provide a great experience
-- Updating SUPPORT.MD with content about this project's support experience
-- Understanding the security reporting process in SECURITY.MD
-- Remove this section from the README
 
-## Contributing
+There is also a 'sample' branch which shows a working example based on the Conference API scenario.  This branch is a good starting point if you are new to custom connectors and want to see a working example of the code section.
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+## Custom Connector Documentation
+[Overview of Power Platform Custom Connectors](https://docs.microsoft.com/en-us/connectors/custom-connectors/)
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+[Creating a Custom Connector from Scratch](https://docs.microsoft.com/en-us/connectors/custom-connectors/define-blank)
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+[Writing Code in a Custom Connector](https://docs.microsoft.com/en-us/connectors/custom-connectors/write-code)
 
-## Trademarks
+## Issues
+Use the [Issue Tracker](https://github.com/richross/CustomConnectorCodeProject/issues) for this repo to report bugs or request features.
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+Thanks!
+
