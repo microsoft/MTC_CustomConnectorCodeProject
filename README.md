@@ -23,3 +23,4 @@ There is also a 'sample' branch which shows a working example based on the Confe
 Use the [Issue Tracker](https://github.com/richross/CustomConnectorCodeProject/issues) for this repo to report bugs or request features.
 
 Thanks!
+
